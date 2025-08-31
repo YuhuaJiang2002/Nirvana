@@ -11,10 +11,10 @@ Nirvana/
 ├── nirvana_backbone/          # Core model architecture and training
 │   ├── train/                 # Training scripts and configurations
 │   ├── eval/                  # Evaluation scripts and benchmarks
-│   ├── modeling_transformer_rnn.py      # RNN-enhanced transformer model
+│   ├── modeling_transformer_rnn.py      # Nirvana model
 │   ├── configuration_transformer_rnn.py # Model configuration
-│   ├── task_aware_delta_net.py         # Task-aware delta network
-│   └── ttt_cross_layer.py              # Test-time training cross layer
+│   ├── task_aware_delta_net.py         # Task-aware Updater
+│   └── ttt_cross_layer.py              # Trigger with online gradient descent cross layer
 ├── specialized_ability/        # Domain-specific capabilities
 │   ├── MRI_reconstruction/    # MRI image reconstruction and analysis model
 │   │   ├── model/            # Custom MRI reconstruction and analysis model
