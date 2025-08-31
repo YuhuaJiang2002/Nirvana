@@ -1,6 +1,6 @@
-# Nirvana: Multi-Modal Foundation Model for Medical Imaging
+# Nirvana: A Specialized Genearlist Model With Task-Aware Memory Mechanism
 
-Nirvana is a comprehensive multi-modal foundation model designed for medical imaging tasks, particularly focused on MRI reconstruction and medical report generation. The project combines state-of-the-art transformer architectures with specialized medical imaging capabilities.
+Nirvana is an SGM with specialized memory mechanism, linear time complexity, and test-time task information extraction. 
 
 ## 🏗️ Project Architecture
 
@@ -28,9 +28,8 @@ Nirvana/
 - **Base Model**: 1.3B parameter transformer with RNN enhancements
 - **Architecture**: Transformer with cross-layer connections and task-aware delta networks
 - **Specializations**: 
-  - MRI reconstruction using VarNet with Nirvana customizations
-  - Medical report generation with domain-specific fine-tuning
-- **Key Features**: Flash attention, sequence parallelism, and distributed training support
+  - MRI reconstruction and medical report generation with domain-specific alibity
+- **Key Features**: Flash linear attention, sequence parallelism, and distributed training support
 
 ## 🚀 Installation
 
@@ -59,7 +58,7 @@ Nirvana/
    pip install -r requirements.txt
    ```
 
-4. **Install Flash Attention (optional, for performance)**
+4. **Install Flash Attention (optional, for enhanced performance in SWA)**
    ```bash
    pip install flash-attn --no-build-isolation
    ```
