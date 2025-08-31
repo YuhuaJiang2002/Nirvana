@@ -35,7 +35,7 @@ Nirvana/
 
 ### Prerequisites
 
-- Python 3.11+
+- Python 3.10+
 - CUDA 11.8+ (for GPU acceleration)
 - Conda or Miniconda
 - 8+ GPUs recommended for training
@@ -49,7 +49,7 @@ Nirvana/
 
 2. **Create and activate conda environment**
    ```bash
-   conda create -n nirvana python=3.11
+   conda create -n nirvana python=3.10
    conda activate nirvana
    ```
 
