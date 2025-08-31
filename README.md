@@ -16,13 +16,10 @@ Nirvana/
 │   ├── task_aware_delta_net.py         # Task-aware delta network
 │   └── ttt_cross_layer.py              # Test-time training cross layer
 ├── specialized_ability/        # Domain-specific capabilities
-│   ├── MRI_reconstruction/    # MRI image reconstruction models
-│   │   ├── model/            # Custom MRI reconstruction models
+│   ├── MRI_reconstruction/    # MRI image reconstruction and analysis model
+│   │   ├── model/            # Custom MRI reconstruction and analysis model
 │   │   ├── dataset/          # MRI dataset handling
 │   │   └── train/            # MRI-specific training
-│   └── MRI_report_generation/ # Medical report generation
-│       ├── model/            # Report generation models
-│       └── train/            # Report generation training
 └── requirements.txt           # Python dependencies
 ```
 
@@ -48,13 +45,12 @@ Nirvana/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
    cd Nirvana
    ```
 
 2. **Create and activate conda environment**
    ```bash
-   conda create -n nirvana python=3.8
+   conda create -n nirvana python=3.11
    conda activate nirvana
    ```
 
@@ -96,18 +92,11 @@ bash train.sh
 - Checkpointing every 1910 steps
 - WandB integration for experiment tracking
 
-#### MRI Reconstruction Training
+#### MRI Reconstruction and Report Generation Training
 
 ```bash
-cd specialized_ability/MRI_reconstruction/train
-# Configure training parameters and run training script
-```
-
-#### Medical Report Generation Training
-
-```bash
-cd specialized_ability/MRI_report_generation/train
-# Configure training parameters and run training script
+cd specialized_ability/MRI_reconstruction
+bash ./train/run_two_stage_training.sh
 ```
 
 ### Evaluation
@@ -131,12 +120,7 @@ bash eval_nirvana_1.3B-niah.sh
 ```
 
 **Supported Benchmarks:**
-- SQuAD completion
-- TriviaQA
-- SWDE
-- FDA
-- NQ Open
-- DROP
+- S-NIAH
 - LongBench
 - Commonsense reasoning tasks
 
@@ -200,9 +184,8 @@ The model configuration is defined in `nirvana_1_3B.json`:
 
 ### Foundation Model Capabilities
 
-- **Language Understanding**: Strong performance on medical and general language tasks
-- **Long Context**: Support for long sequences up to 32K tokens
-- **Task Adaptation**: Efficient fine-tuning for specific medical applications
+- **Language Understanding**: Strong performance on specialized and general language tasks
+- **Task Adaptation**: Efficient fine-tuning for specialized applications
 
 ## 🤝 Contributing
 
@@ -212,11 +195,10 @@ The model configuration is defined in `nirvana_1_3B.json`:
 4. Add tests and documentation
 5. Submit a pull request
 
-
 ## 🙏 Acknowledgments
 
 - FastMRI team for the MRI dataset infrastructure
-- Flash Attention team for efficient attention implementations
+- Flash Linear Attention team for efficient attention implementations
 
 ## 📞 Contact
 
