@@ -1,0 +1,227 @@
+# Nirvana: Multi-Modal Foundation Model for Medical Imaging
+
+Nirvana is a comprehensive multi-modal foundation model designed for medical imaging tasks, particularly focused on MRI reconstruction and medical report generation. The project combines state-of-the-art transformer architectures with specialized medical imaging capabilities.
+
+## 🏗️ Project Architecture
+
+### Core Components
+
+```
+Nirvana/
+├── nirvana_backbone/          # Core model architecture and training
+│   ├── train/                 # Training scripts and configurations
+│   ├── eval/                  # Evaluation scripts and benchmarks
+│   ├── modeling_transformer_rnn.py      # RNN-enhanced transformer model
+│   ├── configuration_transformer_rnn.py # Model configuration
+│   ├── task_aware_delta_net.py         # Task-aware delta network
+│   └── ttt_cross_layer.py              # Test-time training cross layer
+├── specialized_ability/        # Domain-specific capabilities
+│   ├── MRI_reconstruction/    # MRI image reconstruction models
+│   │   ├── model/            # Custom MRI reconstruction models
+│   │   ├── dataset/          # MRI dataset handling
+│   │   └── train/            # MRI-specific training
+│   └── MRI_report_generation/ # Medical report generation
+│       ├── model/            # Report generation models
+│       └── train/            # Report generation training
+└── requirements.txt           # Python dependencies
+```
+
+### Model Architecture
+
+- **Base Model**: 1.3B parameter transformer with RNN enhancements
+- **Architecture**: Transformer with cross-layer connections and task-aware delta networks
+- **Specializations**: 
+  - MRI reconstruction using VarNet with Nirvana customizations
+  - Medical report generation with domain-specific fine-tuning
+- **Key Features**: Flash attention, sequence parallelism, and distributed training support
+
+## 🚀 Installation
+
+### Prerequisites
+
+- Python 3.8+
+- CUDA 11.8+ (for GPU acceleration)
+- Conda or Miniconda
+- 8+ GPUs recommended for training
+
+### Environment Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd Nirvana
+   ```
+
+2. **Create and activate conda environment**
+   ```bash
+   conda create -n nirvana python=3.8
+   conda activate nirvana
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Install Flash Attention (optional, for performance)**
+   ```bash
+   pip install flash-attn --no-build-isolation
+   ```
+
+### Key Dependencies
+
+- **PyTorch**: 2.5.0
+- **Transformers**: 4.52.4
+- **Accelerate**: 1.1.1
+- **Flash Attention**: 2.7.0.post2
+- **FastMRI**: 0.3.0 (for MRI datasets)
+- **WandB**: 0.21.1 (for experiment tracking)
+
+## 🎯 Usage
+
+### Training
+
+#### Pre-training the Base Model
+
+```bash
+cd nirvana_backbone/train
+bash train.sh
+```
+
+**Training Configuration:**
+- Model: 1.3B parameters
+- Data: FineWebEdu dataset
+- Precision: BF16
+- Distributed training with 8 GPUs
+- Checkpointing every 1910 steps
+- WandB integration for experiment tracking
+
+#### MRI Reconstruction Training
+
+```bash
+cd specialized_ability/MRI_reconstruction/train
+# Configure training parameters and run training script
+```
+
+#### Medical Report Generation Training
+
+```bash
+cd specialized_ability/MRI_report_generation/train
+# Configure training parameters and run training script
+```
+
+### Evaluation
+
+#### Language Model Evaluation
+
+```bash
+cd nirvana_backbone/eval
+
+# In-context learning evaluation
+bash eval_nirvana_1.3B-icl.sh
+
+# Long sequence evaluation
+bash eval_nirvana_1.3B-longbench.sh
+
+# Commonsense reasoning evaluation
+bash eval_nirvana_1.3B-commonsense.sh
+
+# NIAH evaluation
+bash eval_nirvana_1.3B-niah.sh
+```
+
+**Supported Benchmarks:**
+- SQuAD completion
+- TriviaQA
+- SWDE
+- FDA
+- NQ Open
+- DROP
+- LongBench
+- Commonsense reasoning tasks
+
+### Model Configuration
+
+The model configuration is defined in `nirvana_1_3B.json`:
+
+```json
+{
+    "hidden_size": 2048,
+    "num_heads": 16,
+    "num_hidden_layers": 22,
+    "max_position_embeddings": 32768,
+    "vocab_size": 32000,
+    "concept_dim": 64,
+    "logit_dim": 32,
+    "window_size": 2048
+}
+```
+
+## 🔧 Customization
+
+### Adding New Specialized Abilities
+
+1. Create a new directory under `specialized_ability/`
+2. Implement your custom models in the `model/` subdirectory
+3. Add dataset handling in the `dataset/` subdirectory
+4. Create training scripts in the `train/` subdirectory
+5. Update the main `__init__.py` files to register your models
+
+### Model Architecture Modifications
+
+- **Task-Aware Delta Network**: Implement custom delta functions in `task_aware_delta_net.py`
+- **Cross-Layer Connections**: Modify `ttt_cross_layer.py` for custom layer interactions
+- **Transformer Variants**: Extend `modeling_transformer_rnn.py` for new architectures
+
+## 📊 Performance
+
+### Model Specifications
+
+- **Parameters**: 1.3B
+- **Training Context Length**: 4096 tokens
+- **Training Precision**: BF16
+- **Acceleration**: Flash Attention 2.0
+- **Parallelism**: Data, tensor, and sequence parallelism support
+
+### Training Efficiency
+
+- **Selective Recompute**: Configurable gradient checkpointing
+- **Mixed Precision**: BF16 training with automatic mixed precision
+- **Distributed Training**: Multi-GPU and multi-node support
+- **Memory Optimization**: Efficient memory management with FSDP
+
+## 🧪 Research Applications
+
+### Medical Imaging
+
+- **MRI Reconstruction**: Fast and accurate MRI image reconstruction from undersampled k-space data
+- **Report Generation**: Automated medical report generation from MRI
+- **Multi-modal Learning**: Integration of k-space, imaging, and textual data
+
+### Foundation Model Capabilities
+
+- **Language Understanding**: Strong performance on medical and general language tasks
+- **Long Context**: Support for long sequences up to 32K tokens
+- **Task Adaptation**: Efficient fine-tuning for specific medical applications
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Implement your changes
+4. Add tests and documentation
+5. Submit a pull request
+
+
+## 🙏 Acknowledgments
+
+- FastMRI team for the MRI dataset infrastructure
+- Flash Attention team for efficient attention implementations
+
+## 📞 Contact
+
+For questions and support, please open an issue on the repository or contact the development team.
+
+---
+
+**Note**: This is a research project. Please ensure compliance with relevant medical data regulations and ethical guidelines when using this model for medical applications. 
