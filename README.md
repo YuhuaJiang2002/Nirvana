@@ -36,7 +36,7 @@ Nirvana/
 
 ### Prerequisites
 
-- Python 3.8+
+- Python 3.11+
 - CUDA 11.8+ (for GPU acceleration)
 - Conda or Miniconda
 - 8+ GPUs recommended for training
