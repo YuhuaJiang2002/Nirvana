@@ -199,10 +199,3 @@ The model configuration is defined in `nirvana_1_3B.json`:
 - FastMRI team for the MRI dataset infrastructure
 - Flash Linear Attention team for efficient attention implementations
 
-## 📞 Contact
-
-For questions and support, please open an issue on the repository or contact the development team.
-
----
-
-**Note**: This is a research project. Please ensure compliance with relevant medical data regulations and ethical guidelines when using this model for medical applications. 
