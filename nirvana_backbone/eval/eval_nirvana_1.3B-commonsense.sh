@@ -7,7 +7,7 @@ export HF_ENDPOINT="https://hf-mirror.com"
 
 suffix=29
 
-model_path="./nirvana-1_3B/hf-95500"
+model_path="./nirvana-1_3B-${suffix}/hf-95500"
 
 tokenizer_path="<YOUR_PATH>"
 cp ${tokenizer_path}/tokenizer_config.json "$model_path"
