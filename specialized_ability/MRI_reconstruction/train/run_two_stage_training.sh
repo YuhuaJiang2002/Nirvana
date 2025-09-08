@@ -4,7 +4,7 @@
 # This script runs both stages of training sequentially
 
 set -e  # Exit on any error
-# cd /cpfs04/shared/mabasic/jiangyuhua/Nirvana/specialized_ability/MRI_image_reconstruction/train
+
 # Configuration variables
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
@@ -12,14 +12,10 @@ PROJECT_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
 # Model paths
 CONFIG_PATH="$SCRIPT_DIR/../model/nirvana_1_3B.json"
 BACKBONE_PATH="$SCRIPT_DIR/../model/model.safetensors"
-# BACKBONE_PATH="/cpfs04/shared/mabasic/jiangyuhua/Nirvana-vision/hf-95500/model.safetensors"
 
 # Data paths
 DATA_DIR_1="$SCRIPT_DIR/../data/MRI/sft"
 DATA_DIR_2="$SCRIPT_DIR/../data/MRI/brain_multicoil_train_batch_1"
-
-# DATA_DIR_1="/cpfs04/shared/mabasic/jiangyuhua/data/MRI/sft"
-# DATA_DIR_2="/cpfs04/shared/mabasic/jiangyuhua/data/MRI/brain_multicoil_train_batch_1"
 
 # Training parameters
 NUM_COILS=16
@@ -176,7 +172,7 @@ run_stage2() {
     
     print_info "Using Stage 1 checkpoint: $STAGE1_CHECKPOINT"
     
-    cd "$(dirname "$SCRIPT_DIR")"  # 切换到MRI_image_reconstruction目录
+    cd "$(dirname "$SCRIPT_DIR")" 
     
     CUDA_VISIBLE_DEVICES=0 python -m train.stage2_image_decoder \
         --config_path "$CONFIG_PATH" \
