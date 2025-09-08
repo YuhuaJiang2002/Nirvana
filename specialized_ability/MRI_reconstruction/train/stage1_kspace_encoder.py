@@ -1,11 +1,5 @@
 """
 Stage 1: K-space encoder training with cross-entropy loss on MRI analysis tokens
-
-This script trains only the k-space encoder (VarNet + ViT) while keeping the Nirvana backbone frozen.
-The training uses cross-entropy loss on MRI analysis tokens following the SFT approach.
-
-Author: Updated for MRI reconstruction training
-Date: 2024
 """
 
 import os
@@ -131,7 +125,7 @@ class Stage1KSpaceEncoderTrainer:
         
         try:
             # Try to load the specified tokenizer first
-            tokenizer = AutoTokenizer.from_pretrained("/cpfs02/user/jiangyuhua/flash-linear-attention/training/gla_1.3B_100B/gla-1.3B-100B")
+            tokenizer = AutoTokenizer.from_pretrained("<YOUR_PATH>")
             if tokenizer.pad_token is None:
                 tokenizer.pad_token = tokenizer.eos_token
             logger.info("Successfully loaded tokenizer from gla-1.3B-100B")
@@ -139,7 +133,7 @@ class Stage1KSpaceEncoderTrainer:
             logger.warning(f"Failed to load specified tokenizer: {e}")
             # Fallback to Qwen2.5-VL tokenizer
             try:
-                tokenizer = AutoTokenizer.from_pretrained("/cpfs04/shared/mabasic/jiangyuhua/models/Qwen2.5-VL-7B-Instruct")
+                tokenizer = AutoTokenizer.from_pretrained("<YOUR_PATH>")
                 if tokenizer.pad_token is None:
                     tokenizer.pad_token = tokenizer.eos_token
                 logger.info("Fallback: loaded Qwen2.5-VL tokenizer")
