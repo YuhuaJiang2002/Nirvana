@@ -60,7 +60,7 @@ Nirvana/
 
 4. **Install Flash Attention (optional, for enhanced performance in SWA)**
    ```bash
-   pip install flash-attn --no-build-isolation
+   pip install flash-attn==2.7.0 --no-build-isolation
    ```
 
 ### Key Dependencies
@@ -122,6 +122,7 @@ bash eval_nirvana_1.3B-niah.sh
 - S-NIAH
 - LongBench
 - Commonsense reasoning tasks
+- FastMRI
 
 ### Model Configuration
 
@@ -163,7 +164,7 @@ The model configuration is defined in `nirvana_1_3B.json`:
 - **Parameters**: 1.3B
 - **Training Context Length**: 4096 tokens
 - **Training Precision**: BF16
-- **Acceleration**: Flash Attention 2.0
+- **Acceleration**: Flash Linear Attention
 - **Parallelism**: Data, tensor, and sequence parallelism support
 
 ### Training Efficiency
@@ -196,6 +197,5 @@ The model configuration is defined in `nirvana_1_3B.json`:
 
 ## 🙏 Acknowledgments
 
-- FastMRI team for the MRI dataset infrastructure
 - Flash Linear Attention team for efficient attention implementations
-
+- FastMRI team for the MRI dataset infrastructure
