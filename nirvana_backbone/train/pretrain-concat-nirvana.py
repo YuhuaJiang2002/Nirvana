@@ -374,7 +374,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Train LLM')
 
     model_args = parser.add_argument_group('model', 'Model Related Settings')
-    model_args.add_argument('--llm', default='/cpfs01/shared/public/liudawei/models/internlm2-1_8b-mycfg',
+    model_args.add_argument('--llm', default='<YOUR_PATH>',
                             help='repo id or local path of the model')
     model_args.add_argument(
         '--train-cfg', default='../configs/internlm2-1_8b.py', help='interntrain config file')
@@ -717,7 +717,7 @@ def pretrain(args):
                            f'but found {args.dtype}.')
 
     if args.dtype == 'bf16':
-        print("这里开启了 bf16 精度")
+        print(" bf16 ")
         
     # AutoConfig.register("transformer_rnn", TransformerConfig_rnn)
     # AutoModelForCausalLM.register(TransformerConfig_rnn, TransformerForCausalLM_rnn)
@@ -759,7 +759,7 @@ def pretrain(args):
         # Ensure all numerical values in the optimizer are fp32.
         # FSDP will use low precision during forward.
         llm = build_llm_model(args, llm_cfg, world_size, dtype)
-        print("注意这里 dispatch model")
+        print("dispatch model")
         dispatch_hf_code(llm)
         for module in llm.modules():
             for p_name, param in module.named_parameters(recurse=False):
@@ -793,7 +793,7 @@ def pretrain(args):
             if args.vocab_size not in param.shape:
                 non_emb_params += param.numel()
             total_params += param.numel()
-        logger.info(f"模型总参数: {total_params}, 非 embedding/output 层(tie=false)参数: {non_emb_params}")
+        logger.info(f"Parameters: {total_params}, except embedding/output Parameters: {non_emb_params}")
 
     dist.barrier()
     
@@ -870,8 +870,6 @@ def pretrain(args):
     '''
 
     lr_scheduler = get_wsd_schedule(
-        # warmup + stable + decay
-        # decay阶段 sqrt衰减
         optimizer,
         num_warmup_steps=warmup_steps,
         num_stable_steps=total_steps-warmup_steps-decay_steps,
@@ -1004,10 +1002,9 @@ def pretrain(args):
     #                          5. Training                                    #
     ###########################################################################
     
-    # 训练开始前调用 gc
     gc.collect()
 
-    '''e2e_tgs 开始计时'''
+    '''e2e_tgs '''
     start_train_t = time.time()
     total_consumed_tokens = 0
     torch.cuda.empty_cache()
@@ -1221,7 +1218,7 @@ def pretrain(args):
             loss /= iters_per_step
 
             # collect for logging
-            # unreduced_losses: list, 长度为 micro_num
+            # unreduced_losses: list, length = micro_num
             # unreduced_losses.append(unreduced_loss.detach().clone())
 
             '''here we don't use logits, remove the calculation of pred acc
@@ -1294,7 +1291,7 @@ def pretrain(args):
             wandbwriter.add_optimize_info(
                 grad_norm.detach().clone(), train_state, cur_lr, batch_count+1)
             wandbwriter.add_speed_info(tgs, end2end_tgs, batch_count+1)
-        # 注意这里要 barrier
+        #  barrier
         dist.barrier()
         tensorboard_time = time.time() - tensorboard_start_time
 
