@@ -222,12 +222,6 @@ Modify the loss functions in the training scripts:
 - Alternative image decoder designs
 - Additional loss terms
 
-### Multi-GPU Training
-The code supports multi-GPU training through PyTorch's DistributedDataParallel:
-```bash
-python -m torch.distributed.launch --nproc_per_node=N stage1_kspace_encoder.py
-```
-
 ## Performance Optimization
 
 ### Memory Optimization
