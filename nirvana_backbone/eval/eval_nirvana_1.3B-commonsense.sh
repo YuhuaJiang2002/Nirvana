@@ -7,9 +7,9 @@ export HF_ENDPOINT="https://hf-mirror.com"
 
 suffix=29
 
-model_path="./nirvana-1_3B-29/hf-95500"
+model_path="./nirvana-1_3B/hf-95500"
 
-tokenizer_path="/cpfs02/shared/llmit6/liudawei/models/Llama-2-7b-chat-hf"
+tokenizer_path="<YOUR_PATH>"
 cp ${tokenizer_path}/tokenizer_config.json "$model_path"
 cp ${tokenizer_path}/tokenizer.json "$model_path"
 cp ${tokenizer_path}/tokenizer.model "$model_path"
