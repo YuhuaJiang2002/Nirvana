@@ -3,7 +3,7 @@ set -x
 
 conda activate nirvana
 
-suffix='29'
+suffix=29
 
 model_path="./nirvana-1_3B-${suffix}/hf-95500"
 tokenizer_path="<YOUR_PATH>"
