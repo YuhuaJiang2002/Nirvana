@@ -217,7 +217,7 @@ class TransformerDecoder(nn.Module):
         # Dropout
         self.dropout = nn.Dropout(0.1)
         
-        print(f"✅ Created TransformerDecoder with {num_layers} layers, hidden_size={config.hidden_size}")
+        print(f"Created TransformerDecoder with {num_layers} layers, hidden_size={config.hidden_size}")
     
     def forward(self, hidden_states, attention_mask=None):
         """
@@ -228,12 +228,11 @@ class TransformerDecoder(nn.Module):
         Returns:
             hidden_states: (B, seq_len, hidden_size) - processed hidden states
         """
-        # 通过4层transformer
+
         for layer in self.layers:
             hidden_states = layer(hidden_states)
             hidden_states = self.dropout(hidden_states)
         
-        # 最终的layer norm
         hidden_states = self.norm(hidden_states)
         
         return hidden_states
