@@ -1,4 +1,3 @@
-# Copyright (c) InternLM. All rights reserved.
 import os
 import json
 import math
@@ -22,17 +21,12 @@ DO_FEISHU_ALERT = True
 # monitor = dict(
 #     # feishu alert configs
 #     alert=dict(
-#         enable_feishu_alert=DO_FEISHU_ALERT,
-#         feishu_alert_address="https://open.feishu.cn/open-apis/bot/v2/hook/611bdd82-27da-43d2-b877-33d4b0614852",
 #         # light_monitor address to send heartbeat
 #         light_monitor_address=os.getenv("LIGHT_MONITORING_ADDRESS"),
 #         heartbeat_interval=500,  # the interval steps for sending heartbeat
 #         alert_file_path=f"llm_alter/{JOB_NAME}_alert.log",
 #         alert_keys=alert_keys,
 #     ),
-#     # mlflow configs
-#     mlflow=dict(enable_mlflow_track=DO_MLFLOW_TRACK,
-#                 mlflow_folder="/mnt/petrelfs/share_data/llm_data/mlflow_record/"),
 # )
 
 VOCAB_FILE = './Llama-2-7b-chat-hf/tokenizer.model'
@@ -102,9 +96,9 @@ MP_SPAWN = False
 
 ENABLE_SAVE_CKPT = True
 
-TRAIN_FOLDER: str = f"/cpfs02/shared/llmit6/liudawei/dataset/my_pretrain_ds"
+TRAIN_FOLDER: str = f"<YOUR_PATH>"
 VALID_FOLDER = None
-tensorboard_folder: str = f"/cpfs02/shared/llmit6/liudawei/xpuyu_work_dirs/dataset_simulator_tensorboard/internlm-1_8b-myds-simulator"
+tensorboard_folder: str = f"<YOUR_PATH>"
 
 # minicpm GBS = 3.93M (120 gpus, packed_len=32768)
 # STEP_1B = 960 # gpu=64, 4, 4096
@@ -112,8 +106,7 @@ tensorboard_folder: str = f"/cpfs02/shared/llmit6/liudawei/xpuyu_work_dirs/datas
 # STEP_1B = 320 # gpu=96, 8, 4096
 STEP_1B = 955 # gpu=64; 4, 4096
 WARMUP_STEP = int(STEP_1B*1) # WARMUP
-WS_STEP = int(STEP_1B*1)  # 这里是 warmup+stable
-# DECAY, WARMUP steps 设置小于1时，就表示 total steps的比例，大于1的整数就是真实步数
+WS_STEP = int(STEP_1B*1)  # warmup+stable
 DECAY_STEP = int(STEP_1B*99)
 # 'cosine', 'miror_cosine', 'linear', 'exp', 'square', 'sqrt'
 DECAY_TYPE = "cosine"
@@ -180,22 +173,6 @@ OSS_HEAD = "boto3:s3"
 OSS_NAME = "checkpoints_ssd_02"
 OSS_IP = "10.135.7.249"  # P/T cluster
 
-# OSS_HEAD = "boto3:s3"
-# OSS_NAME = "{USER}_openlmlab"
-# OSS_IP = "10.140.86.165"  # Langchao cluster
-
-# OSS_HEAD = "boto3:s3"
-# OSS_NAME = "model_weights"
-# OSS_IP = "10.140.14.252"  # S cluster
-
-# OSS_HEAD = "volc:vc"
-# OSS_NAME = "tos-sh-llm"
-# OSS_IP = "tos-cn-shanghai.ivolces.com"
-
-# OSS_HEAD = "oss2:ali"
-# OSS_NAME = "pjlab-lingjun-a100-test"
-# OSS_IP = "oss-cn-wulanchabu-internal.aliyuncs.com"
-
 
 # Ckpt folder format:
 #  fs: 'local: /mnt/nfs/XXX'
@@ -204,7 +181,7 @@ OSS_IP = "10.135.7.249"  # P/T cluster
 SAVE_CKPT_FOLDER = f"local:./ckpts/{JOB_NAME}"
 
 # If you want to train from scratch, set LOAD_CKPT_FOLDER to None.
-LOAD_CKPT_FOLDER = None  # 没啥用，直接看resume from
+LOAD_CKPT_FOLDER = None  
 # LOAD_CKPT_FOLDER = f"boto3:s3://{OSS_NAME}.{OSS_IP}/{JOB_NAME}/{CHECKPOINT_EVERY}"
 
 # NOTE: there are 2 params in LOAD_CKPT_FOLDER_INFO: content and ckpt_type.
@@ -230,18 +207,6 @@ DATASET_WEIGHTS = {"finewebedu-sample-100BT-jsonl": 1.0}
 
 DATASET_WEIGHTS = {k: v for k, v in DATASET_WEIGHTS.items() if v > 0}
 
-# SUBSET_PARAMS = {}
-# with open(os.path.join(TRAIN_FOLDER, "/cpfs02/puyu/shared/alillm2/songdemin/share_data/ampere_2_8/attribute_data.json"), "r") as fr_attr:
-#     attr_json = json.load(fr_attr)
-# SUBSET_PARAMS.update(attr_json)
-# with open(os.path.join(TRAIN_FOLDER, "/cpfs02/puyu/shared/alillm2/songdemin/share_data/ampere_2_8/tokenizer_wrapper.json"), "r") as fr_tokenizer:
-#     tokenizer_json = json.load(fr_tokenizer)
-# for subset, params in tokenizer_json.items():
-#     if subset in SUBSET_PARAMS.keys():
-#         SUBSET_PARAMS[subset] = {**SUBSET_PARAMS[subset], **params}
-#     else:
-#         SUBSET_PARAMS[subset] = params
-
 ckpt = dict(
     # Save ckpt settings
     # If set to True, will save ckpt to save_ckpt_folder.
@@ -257,7 +222,7 @@ ckpt = dict(
     load_ckpt_info=LOAD_CKPT_FOLDER_INFO,
     # Other infos
     async_upload=True,
-    async_upload_tmp_folder=f"/dev/shm/internlm_tmp_ckpt_{JOB_NAME}/",
+    async_upload_tmp_folder=f"./internlm_tmp_ckpt_{JOB_NAME}/",
     stop_file_path=f"llm_alter/{JOB_NAME}.log",
 )
 
