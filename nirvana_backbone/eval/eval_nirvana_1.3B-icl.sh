@@ -1,18 +1,13 @@
 #!/bin/bash
 set -x
-## 载入环境
-source /cpfs02/user/chengshuang/anaconda3/etc/profile.d/conda.sh
-conda activate opencompass-nirvana
-# source /cpfs04/user/liudawei/anaconda3/etc/profile.d/conda.sh
-# conda activate /cpfs02/shared/llmit6/liudawei/env/xpuyu
-# source /cpfs02/user/jiangyuhua/miniconda/etc/profile.d/conda.sh
-# conda activate fla
+
+conda activate nirvana
 
 export HF_ENDPOINT="https://hf-mirror.com"
 
 suffix=29
 model_path="./nirvana-1_3B-${suffix}/hf-95500"
-tokenizer_path="/cpfs02/shared/llmit6/liudawei/models/Llama-2-7b-chat-hf"
+tokenizer_path="<YOUR_PATH>"
 cp ${tokenizer_path}/tokenizer_config.json "$model_path"
 cp ${tokenizer_path}/tokenizer.json "$model_path"
 cp ${tokenizer_path}/tokenizer.model "$model_path"
