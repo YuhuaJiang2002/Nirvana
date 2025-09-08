@@ -12,24 +12,17 @@ Nirvana/
 │   ├── train/                 # Training scripts and configurations
 │   ├── eval/                  # Evaluation scripts and benchmarks
 │   ├── modeling_transformer_rnn.py      # Nirvana model
-│   ├── configuration_transformer_rnn.py # Model configuration
-│   ├── task_aware_delta_net.py         # Task-aware Updater
-│   └── ttt_cross_layer.py              # Trigger with cross-layer online gradient descent 
+│   ├── nirvana_1_3B.json                # Nirvana 1.3B configuration
+│   ├── configuration_transformer_rnn.py # Nirvana configuration
+│   ├── task_aware_delta_net.py          # Specialized Memory Updater
+│   └── ttt_cross_layer.py               # Task-Aware Trigger (with cross-layer online gradient descent)
 ├── specialized_ability/        # Domain-specific capabilities
-│   ├── MRI_reconstruction/    # MRI image reconstruction and analysis model
-│   │   ├── model/            # Custom MRI reconstruction and analysis model
-│   │   ├── dataset/          # MRI dataset handling
-│   │   └── train/            # MRI-specific training
-└── requirements.txt           # Python dependencies
+│   ├── MRI_reconstruction/     # MRI image reconstruction and analysis model
+│   │   ├── model/              # Custom MRI reconstruction and analysis model
+│   │   ├── dataset/            # MRI dataset handling
+│   │   └── train/              # MRI-specific training
+└── requirements.txt            # Python dependencies
 ```
-
-### Model Architecture
-
-- **Base Model**: 1.3B parameter transformer with RNN enhancements
-- **Architecture**: Transformer with cross-layer connections and task-aware delta networks
-- **Specializations**: 
-  - MRI reconstruction and medical report generation with domain-specific alibity
-- **Key Features**: Flash linear attention, sequence parallelism, and distributed training support
 
 ## 🚀 Installation
 
@@ -185,17 +178,5 @@ The model configuration is defined in `nirvana_1_3B.json`:
 ### Foundation Model Capabilities
 
 - **Language Understanding**: Strong performance on specialized and general language tasks
-- **Task Adaptation**: Efficient fine-tuning for specialized applications
+- **Task Adaptation**: Efficient adaptation for specialized applications
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Implement your changes
-4. Add tests and documentation
-5. Submit a pull request
-
-## 🙏 Acknowledgments
-
-- Flash Linear Attention team for efficient attention implementations
-- FastMRI team for the MRI dataset infrastructure
