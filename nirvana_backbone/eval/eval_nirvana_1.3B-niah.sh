@@ -3,14 +3,10 @@ set -x
 
 conda activate nirvana
 
-export HF_ENDPOINT="https://hf-mirror.com"
-
-# suffix='t3-align'
-# suffix='nospecialmask'
-suffix='h-rotate-21'
+suffix='29'
 
 model_path="./nirvana-1_3B-${suffix}/hf-95500"
-tokenizer_path="/cpfs02/shared/llmit6/liudawei/models/Llama-2-7b-chat-hf"
+tokenizer_path="<YOUR_PATH>"
 cp ${tokenizer_path}/tokenizer_config.json "$model_path"
 cp ${tokenizer_path}/tokenizer.json "$model_path"
 cp ${tokenizer_path}/tokenizer.model "$model_path"
