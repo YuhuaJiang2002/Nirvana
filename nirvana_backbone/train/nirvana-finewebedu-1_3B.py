@@ -2,15 +2,7 @@ import os
 import json
 import math
 from torch.optim.lr_scheduler import _LRScheduler
-# from internlm.config.config import read_base
 from functools import partial
-
-# with read_base():
-#     from configs._base_.default_runtime import *  # pylint: disable=wildcard-import,unused-wildcard-import
-#     from configs._base_.models.internlm.internlm3_moe_20B_A3B import *  # pylint: disable=wildcard-import,unused-wildcard-import
-#     from configs._base_.monitors.base import *  # pylint: disable=wildcard-import,unused-wildcard-import
-# model['extra_pred_tokens'] = N
-# note off the script above will envoke training with multi-token-prediction: predict next N+1 tokens.
 
 if "JOB_NAME" in os.environ:
     JOB_NAME = os.environ["JOB_NAME"]
