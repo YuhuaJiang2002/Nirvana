@@ -7,7 +7,7 @@ This directory contains the implementation of a two-stage training approach for 
 The two-stage training approach consists of:
 
 1. **Stage 1**: Train the k-space encoder (VarNet + ViT) with cross-entropy loss on MRI analysis tokens
-2. **Stage 2**: Train the image decoder (U-Net) with SSIM loss on reconstructed images
+2. **Stage 2**: Train the image decoder with SSIM loss on reconstructed images
 
 This approach ensures that:
 - The Nirvana backbone remains frozen, preserving its language understanding capabilities
@@ -19,9 +19,9 @@ This approach ensures that:
 
 ### Model Components
 
-- **Nirvana Backbone**: 1.3B parameter frozen transformer model
+- **Nirvana Backbone**: 1.3B parameter frozen Nirvana model
 - **K-space Encoder**: Multi-coil variational network (VarNet) + lightweight ViT
-- **Image Decoder**: U-Net architecture with approximately 160M parameters
+- **Image Decoder**: U-Net architecture
 - **Layer Normalization**: Applied before k-space encoder and image decoder for training stability
 
 ### Training Stages
@@ -217,12 +217,6 @@ Modify the loss functions in the training scripts:
 - Stage 1: Custom cross-entropy variants
 - Stage 2: Custom image quality metrics
 
-### Data Augmentation
-Implement data augmentation in the dataset classes:
-- Random flips and rotations
-- Intensity variations
-- K-space augmentation
-
 ### Model Modifications
 - Custom k-space encoder architectures
 - Alternative image decoder designs
@@ -261,43 +255,3 @@ python -m torch.distributed.launch --nproc_per_node=N stage1_kspace_encoder.py
 - Run inference on test data
 - Generate reconstruction results
 - Compute final metrics
-
-## Contributing
-
-When contributing to this codebase:
-1. Follow the existing code style
-2. Add comprehensive documentation
-3. Include unit tests for new features
-4. Update this README as needed
-5. Ensure backward compatibility
-
-## Citation
-
-If you use this code in your research, please cite:
-```bibtex
-@article{nirvana_mri_reconstruction,
-  title={Two-Stage MRI Reconstruction with Nirvana: Specialized Ability Training},
-  author={Your Name},
-  journal={arXiv preprint},
-  year={2024}
-}
-```
-
-## License
-
-This code is provided for research purposes. Please refer to the project's main license for usage terms.
-
-## Support
-
-For questions and issues:
-1. Check the existing documentation
-2. Review the code comments
-3. Open an issue in the project repository
-4. Contact the development team
-
-## Acknowledgments
-
-- Nirvana model developers
-- fastMRI dataset and tools
-- PyTorch and Transformers communities
-- Medical imaging research community 
