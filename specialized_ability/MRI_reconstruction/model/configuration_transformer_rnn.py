@@ -6,8 +6,6 @@ from transformers.configuration_utils import PretrainedConfig
 
 from transformers import AutoConfig, AutoModel, AutoModelForCausalLM
 
-# AutoConfig
-
 class TransformerConfig_rnn(PretrainedConfig):
 
     model_type = 'transformer_rnn'
