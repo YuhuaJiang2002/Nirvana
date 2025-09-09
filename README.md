@@ -53,7 +53,7 @@ Nirvana/
 
 4. **Install Flash Attention (optional, for enhanced performance in SWA)**
    ```bash
-   pip install flash-attn==2.7.0 --no-build-isolation
+   pip install flash-attn==2.7.0.post2 --no-build-isolation
    ```
 
 ### Key Dependencies
@@ -62,6 +62,7 @@ Nirvana/
 - **Transformers**: 4.52.4
 - **Accelerate**: 1.1.1
 - **Flash Attention**: 2.7.0.post2
+- **Flash Linear Attention**: 0.2.2
 - **FastMRI**: 0.3.0 (for MRI datasets)
 - **WandB**: 0.21.1 (for experiment tracking)
 
