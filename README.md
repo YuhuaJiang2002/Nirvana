@@ -1,4 +1,4 @@
-# Nirvana: A Specialized Genearlist Model With Task-Aware Memory Mechanism
+# Nirvana: A Specialized Genearlist Model With Task-Aware Memory Mechanism | ACL main 2026
 
 Nirvana is a Specialized Genearlist Model with task-aware memory mechanism, linear time complexity, and test-time task information extraction. 
 
